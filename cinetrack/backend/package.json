@@ -1,15 +1,18 @@
 {
-  "name": "cinetrack-frontend",
+  "name": "cinetrack-backend",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
     "axios": "^1.4.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "dotenv": "^16.0.3",
+    "cors": "^2.8.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "node server.js",
+    "dev": "node server.js"
   }
 }

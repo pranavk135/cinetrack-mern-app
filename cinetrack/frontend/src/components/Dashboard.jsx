@@ -59,6 +59,19 @@ function Group({ title, items, token, refresh }) {
                   Rate
                 </button>
 
+                {/* --- PUBLIC TOGGLE --- */}
+                <button
+                  className="btn tiny"
+                  style={{ background: it.isPublic ? '#10b981' : '#6b7280' }}
+                  onClick={async () => {
+                    await apiPut(`/api/movies/${it._id}`, token, { isPublic: !it.isPublic });
+                    refresh();
+                  }}
+                  title={it.isPublic ? "Make private" : "Make public"}
+                >
+                  {it.isPublic ? "🌐 Public" : "🔒 Private"}
+                </button>
+
                 {/* --- DELETE BUTTON --- */}
                 <button
                   className="btn danger tiny"
