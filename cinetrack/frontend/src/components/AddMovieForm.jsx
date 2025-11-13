@@ -14,7 +14,7 @@ export default function AddMovieForm({ token, refresh, lists }) {
     if (!q.trim()) return;
     try {
       const r = await apiGet(`/api/movies/search?q=${encodeURIComponent(q)}`, token);
-      setResults(r.data || r);
+      setResults(Array.isArray(r) ? r : []);
     } catch (err) {
       console.error("Search failed:", err);
       alert("Search failed");
