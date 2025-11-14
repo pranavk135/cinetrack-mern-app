@@ -21,7 +21,20 @@ router.put("/:id/toggle-status", auth, movieCtrl.toggleStatus);
 router.delete("/:id", auth, movieCtrl.deleteMovie);
 
 // Public explorer: public movies
-router.get("/public", movieCtrl.getPublicListsWithPreview || movieCtrl.getPublicMovies);
+
+// GET PUBLIC MOVIES (based on public lists)
+router.get("/public", async (req, res) => {
+  try {
+    const publicLists = await List.find({ isPublic: true });
+    const listNames = publicLists.map((l) => l.name);
+
+    const movies = await Movie.find({ listName: { $in: listNames } });
+    res.json(movies);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // Search OMDb (public)
 router.get("/search", async (req, res) => {

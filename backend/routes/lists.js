@@ -90,15 +90,13 @@ router.delete("/:id", auth, async (req, res) => {
 // -----------------------------------------------------------
 // Public lists explorer (NO auth)
 // -----------------------------------------------------------
+// GET PUBLIC LISTS
 router.get("/public", async (req, res) => {
   try {
-    const lists = await List.find({ isPublic: true })
-      .sort({ createdAt: -1 });
-
+    const lists = await List.find({ isPublic: true });
     res.json(lists);
   } catch (err) {
-    console.error("Public Lists Error:", err);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ error: err.message });
   }
 });
 
